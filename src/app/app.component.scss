@@ -1,0 +1,52 @@
+.espn-banner {
+  background-color: #CC0000; /* Guardsman Red, similar to ESPN */
+  height: 200px; /* Adjust as needed */
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #95262e; /* White for text */
+  font-family: Arial, sans-serif; /* A common sans-serif font */
+}
+
+.text-background {
+  background-color: white;
+}
+
+.espn-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image covers the entire banner space */
+  position: absolute;
+  z-index: 0;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 20px;
+}
+
+.banner-content h1 {
+  font-size: 3em; /* Larger for headline */
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.banner-content p {
+  font-size: 1.2em; /* Smaller for descriptions */
+}
+
+.cta-button {
+  background-color: #F9B300; /* Selective Yellow, another ESPN brand color */
+  color: #000000; /* Black for contrast */
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 20px;
+  display: inline-block;
+}
