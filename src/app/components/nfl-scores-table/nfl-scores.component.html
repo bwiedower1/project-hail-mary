@@ -1,0 +1,32 @@
+<p-table [value]="scores" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="caption">
+    <div class="table-header">
+      <p-select 
+        [options]="weeks" 
+        [(ngModel)]="selectedWeek"
+        optionLabel="value" 
+        placeholder="Select a Week" 
+        class="w-full md:w-56"/>    
+    </div>
+  </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Home</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>Away</th>
+            <th>Time</th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-score>
+        <tr>
+            <td>{{ score.homeTeam }}</td>
+            <td>{{ score.homeScore }}</td>
+            <td> - </td>
+            <td>{{ score.awayScore }}</td>
+            <td>{{ score.awayTeam }}</td>
+            <td>{{ score.time }}</td>
+          </tr>
+    </ng-template>
+</p-table>

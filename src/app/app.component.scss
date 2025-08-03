@@ -40,13 +40,11 @@
   font-size: 1.2em; /* Smaller for descriptions */
 }
 
-.cta-button {
-  background-color: #F9B300; /* Selective Yellow, another ESPN brand color */
-  color: #000000; /* Black for contrast */
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 5px;
-  font-weight: bold;
-  margin-top: 20px;
-  display: inline-block;
+.p-tab-active {
+  border-color: #95262e;
+  color:#95262e
+}
+
+.tab {
+  --p-tabs-active-bar-background: #95262e
 }

@@ -1,12 +1,15 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+import { TabsModule } from 'primeng/tabs';
+import { TableModule } from 'primeng/table';
+import { NflScoresTable } from './components/nfl-scores-table/nfl-scores.component';
 
 @Component({
   selector: 'app-root',
   imports: [
-    RouterOutlet,
-    ButtonModule
+    ButtonModule,
+    TabsModule,
+    NflScoresTable
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
