@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+.mr-16 {
+    margin-right: 16px;
+}
+
+.ml-16 {
+    margin-left: 16px;
+}
+
+.mr-8 {
+    margin-right: 8px;
+}
+
+.ml-8 {
+    margin-left: 8px;
+}
+
+.px-0 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.py-0 {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+}

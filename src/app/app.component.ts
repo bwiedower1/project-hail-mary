@@ -3,13 +3,15 @@ import { ButtonModule } from 'primeng/button';
 import { TabsModule } from 'primeng/tabs';
 import { TableModule } from 'primeng/table';
 import { NflScoresTable } from './components/nfl-scores-table/nfl-scores.component';
+import { ImageModule } from 'primeng/image';
 
 @Component({
   selector: 'app-root',
   imports: [
     ButtonModule,
     TabsModule,
-    NflScoresTable
+    NflScoresTable,
+    ImageModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

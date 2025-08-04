@@ -5,6 +5,10 @@ import { TableModule } from 'primeng/table';
 import { SelectModule } from 'primeng/select';
 import { FormsModule } from '@angular/forms';
 import { EspnService } from '../../service/espn-service';
+import { SeasonType } from '../../utils/enums';
+import { NgClass, NgIf } from '@angular/common';
+import { ImageModule } from 'primeng/image';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @Component({
   selector: 'nfl-scores-table',
@@ -13,7 +17,11 @@ import { EspnService } from '../../service/espn-service';
     TabsModule,
     TableModule,
     SelectModule,
-    FormsModule
+    FormsModule,
+    NgClass,
+    ImageModule,
+    ProgressSpinnerModule,
+    NgIf
   ],
   templateUrl: './nfl-scores.component.html',
   styleUrl: './nfl-scores.component.scss',
@@ -22,53 +30,53 @@ import { EspnService } from '../../service/espn-service';
 export class NflScoresTable implements OnInit{
   scores: any[];
   weeks: any[];
-  selectedWeek: any
+  years: any[];
+  selectedWeek: any;
+  selectedYear: any;
   data: any;
+  tableLoading: boolean | undefined;
+
   constructor(private espnService: EspnService) {
-    this.scores  = [
-      {
-        homeTeam: 'New England Patriots',
-        homeScore: 17,
-        awayTeam: "Las Vegas Raiders",
-        awayScore: 14,
-        time: 'Final'
-      },
-      {
-        homeTeam: 'Kansas City Chiefs',
-        homeScore: 14,
-        awayTeam: "Cincinatti Bengals",
-        awayScore: 20,
-        time: 'Final'
-      },
-      {
-        homeTeam: 'San Francisco 49ers',
-        homeScore: 17,
-        awayTeam: "Seattle Seahawks",
-        awayScore: 14,
-        time: 'Final'
-      },
-    ];
+    this.scores  = [];
     this.weeks = [
       {
         value: 'Week 1',
         code: 1
-      },
-      {
-        value: 'Week 2',
-        code: 2
-      },
-      {
-        value: 'Week 3',
-        code: 3
-      },
+      }
     ];
-    this.selectedWeek = this.weeks[0]
+    this.years = [
+      {
+        value: '2023',
+        code: 2023
+      },
+      {
+        value: '2024',
+        code: 2024
+      },
+      {
+        value: '2025',
+        code: 2025
+      }
+    ]
+    this.selectedWeek = this.weeks[0];
+    this.selectedYear = this.years[2];
   }
 
   ngOnInit(): void {
-    this.espnService.getScoreboardData(2024, SeasonType.PreSeason, 1).subscribe(response => {
-      this.data = response;
-      console.log('API Data:', this.data);
+    this.tableLoading = true;
+    this.espnService.getScoreboardData(2025, SeasonType.RegSeason, 1).subscribe(response => {
+      this.scores = this.espnService.processNflScoreData(response);
+      this.weeks = this.espnService.processLeagueWeekInfo(response);
+      this.selectedWeek = this.weeks[0];
+      this.tableLoading = false;
+    });
+  }
+
+  onSelected() {
+    this.tableLoading = true;
+    this.espnService.getScoreboardData(this.selectedYear.code, SeasonType.RegSeason, this.selectedWeek.code).subscribe(response => {
+      this.scores = this.espnService.processNflScoreData(response);
+      this.tableLoading = false;
     });
   }
 }
