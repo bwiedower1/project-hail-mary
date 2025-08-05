@@ -2,6 +2,7 @@
    [value]="scores" 
    [tableStyle]="{ 'min-width': '50rem' }" 
    [scrollable]="true"
+   stripedRows    
    [loading]="tableLoading">
   <ng-template pTemplate="caption">
     <div class="table-header">
@@ -31,10 +32,11 @@
             <th></th>
             <th>Away</th>
             <th></th>
+            <th></th>
         </tr>
     </ng-template>
     <ng-template #body let-score>
-        <tr>
+        <tr class="">
             <td class="flex">
               {{ score.homeTeam }}
               <p-image class="ml-8" [src]=score.homeTeamLogo alt="" width="20" height="20"/>           
@@ -42,11 +44,43 @@
             <td class="px-0" [ngClass]="{'highlighted': score.winner === 'home' }">{{ score.homeScore }}</td>
             <td class="px-0"> - </td>
             <td class="px-0" [ngClass]="{'highlighted': score.winner === 'away' }">{{ score.awayScore }}</td>
-            <td class="flex">
+            <td class="flex" [style]="{ 'align-items': 'center', 'padding-bottom': '15px' }">
               {{ score.awayTeam }}
               <p-image class="ml-8" [src]=score.awayTeamLogo alt="" width="20" height="20"/>           
             </td>
-            <td>{{ score.status }}</td>
+            <td>
+              <div class="flex" [style]="{ 'align-items': 'center' }">
+                {{ score.status }}
+                <p-button 
+                  icon="pi pi-plus" 
+                  class="sm-btn ml-16" 
+                  styleClass="p-button-secondary"
+                  (click)="onRowClick(score)" 
+                />
+                <!-- align flex end for button spacing??? -->
+              </div>
+            </td>
           </tr>
     </ng-template>
 </p-table>
+
+<p-dialog header="Header" [modal]="true" [(visible)]="detailsDialogVisible" [style]="{ width: '50rem' }" [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }">
+    <p class="mb-8">
+        Lorem ipsum dolor sit amet...
+    </p>
+    <p class="mb-8">
+        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium...
+    </p>
+    <p class="mb-8">
+        At vero eos et accusamus et iusto odio dignissimos...
+    </p>
+    <p class="mb-8">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit...
+    </p>
+    <p class="mb-8">
+        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium...
+    </p>
+    <p>
+        At vero eos et accusamus et iusto odio dignissimos...
+    </p>
+</p-dialog>

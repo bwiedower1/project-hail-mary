@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs'; // For handling asynchronous data
+import { EventInfo, NFLData } from '../utils/nfl-interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +17,10 @@ export class EspnService {
   }
 
   processNflScoreData(response: any): any[] {
-    return response.events.map((event: { competitions: { competitors: any[]; }[]; id: any; name: any; status: { type: { detail: any; }; }; }) => {
-      const homeCompetitor = event.competitions[0].competitors.find(c => c.homeAway === 'home');
-      const awayCompetitor = event.competitions[0].competitors.find(c => c.homeAway === 'away');
+    return response.events.map((event: any) => {
+      const homeCompetitor = event.competitions[0].competitors.find((c: { homeAway: string; }) => c.homeAway === 'home');
+      const awayCompetitor = event.competitions[0].competitors.find((c: { homeAway: string; }) => c.homeAway === 'away');
+      const gameInfo = event.competitions[0];
 
       let winner: 'home' | 'away' | null = null;
       if (homeCompetitor?.winner) winner = 'home';
@@ -35,6 +37,7 @@ export class EspnService {
         awayTeamLogo: awayCompetitor?.team.logo,
         awayScore: awayCompetitor?.score || 0,
         winner: winner,
+        broadcast: gameInfo.broadcast
       };
     });
   }
