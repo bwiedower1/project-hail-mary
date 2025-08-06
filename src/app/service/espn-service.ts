@@ -31,13 +31,22 @@ export class EspnService {
         name: event.name,
         status: event.status.type.detail,
         homeTeam: homeCompetitor?.team.displayName || 'N/A',
+        homeTeamAbb: homeCompetitor?.team.abbreviation || 'N/A',
         homeTeamLogo: homeCompetitor?.team.logo,
+        homeTeamRecord: homeCompetitor?.records[0].summary || 'N/A',
         homeScore: homeCompetitor?.score || 0,
         awayTeam: awayCompetitor?.team.displayName || 'N/A',
+        awayTeamAbb: awayCompetitor?.team.abbreviation || 'N/A',
         awayTeamLogo: awayCompetitor?.team.logo,
+        awayTeamRecord: awayCompetitor?.records[0].summary || 'N/A',
         awayScore: awayCompetitor?.score || 0,
         winner: winner,
-        broadcast: gameInfo.broadcast
+        broadcast: gameInfo.broadcast,
+        homeTeamQuarterScores: homeCompetitor?.linescores || [],
+        awayTeamQuarterScores: awayCompetitor?.linescores || [],
+        homePlayerStats: homeCompetitor?.playerStats || [],
+        awayPlayerStats: awayCompetitor?.playerStats || [],
+        gameHighlights: gameInfo?.headlines?.[0] || [],
       };
     });
   }

@@ -1,0 +1,82 @@
+<p-dialog 
+    [modal]="true" 
+    [(visible)]="detailsDialogVisible" 
+    [style]="{ width: '50rem' }" 
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    (onHide)="closeDialog()"
+    >
+    <div class="scoreboard">
+        <div class="title mb-4">
+            <p-popover  #myPopover>
+                <div>
+                    <div>Location Info</div>
+                    <div>broadcast</div>
+                </div>
+            </p-popover>
+            <button 
+                pButton 
+                type="button"
+                #myButton 
+                icon="pi pi-info-circle" 
+                class="sm-btn btn-color" 
+                styleClass="p-button-secondary"
+                (click)="togglePopover($event)"
+            ></button>
+        </div>
+        <div class="">
+            <div class="title"><span>Final Score</span></div>
+            <div class="record">
+                <span>Home</span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span>Away</span>
+            </div>
+            <div class="score">
+                <span>{{ gameDetails?.homeTeam }}</span>
+                <span [ngClass]="{'highlighted': gameDetails?.winner === 'home' }">{{ gameDetails?.homeScore }}</span>
+                <span> - </span>
+                <span [ngClass]="{'highlighted': gameDetails?.winner === 'away' }">{{ gameDetails?.awayScore }}</span>
+                <span>{{ gameDetails?.awayTeam }}</span>
+            </div>
+            <div class="record">
+                <span>({{ gameDetails?.homeTeamRecord }})</span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span>({{ gameDetails?.awayTeamRecord }})</span>
+            </div>
+            <table>
+                <tr>
+                    <th>Team</th>
+                    <th>Q1</th>
+                    <th>Q2</th>
+                    <th>Q3</th>
+                    <th>Q4</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <td>{{ gameDetails?.homeTeamAbb }}</td>
+                    <td>{{ gameDetails?.homeTeamQuarterScores[0].value }}</td>
+                    <td>{{ gameDetails?.homeTeamQuarterScores[1].value }}</td>
+                    <td>{{ gameDetails?.homeTeamQuarterScores[2].value }}</td>
+                    <td>{{ gameDetails?.homeTeamQuarterScores[3].value }}</td>
+                    <td>{{ gameDetails?.homeScore }}</td>
+                </tr>
+                <tr>
+                    <td>{{ gameDetails?.awayTeamAbb }}</td>
+                    <td>{{ gameDetails?.awayTeamQuarterScores[0].value }}</td>
+                    <td>{{ gameDetails?.awayTeamQuarterScores[1].value }}</td>
+                    <td>{{ gameDetails?.awayTeamQuarterScores[2].value }}</td>
+                    <td>{{ gameDetails?.awayTeamQuarterScores[3].value }}</td>
+                    <td>{{ gameDetails?.awayScore }}</td>
+                </tr>
+            </table>            
+        </div>
+        <div class="flex">
+            <app-player-stats></app-player-stats>
+
+        </div>
+            <!-- <app-recap [recapInfo]="gameDetails?.gameHighlights"></app-recap> -->
+    </div>
+</p-dialog>

@@ -10,7 +10,7 @@ import { NgClass, NgIf } from '@angular/common';
 import { ImageModule } from 'primeng/image';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DialogModule } from 'primeng/dialog';
-import { NflGameFinalDialog } from '../../shared/nfl-game-final-dialog/nfl-game-final-dialog/nfl-game-final-dialog';
+import { NflGameFinalDialog } from '../../shared/nfl-game-final-dialog/nfl-game-final-dialog';
 
 @Component({
   selector: 'nfl-scores-table',
@@ -35,6 +35,7 @@ export class NflScoresTable implements OnInit{
   scores: any[];
   weeks: any[];
   years: any[];
+  gameDetails: any;
   selectedWeek: any;
   selectedYear: any;
   data: any;
@@ -85,10 +86,10 @@ export class NflScoresTable implements OnInit{
     });
   }
 
-  onRowClick(score: any) {
-    console.log('Row clicked:', score);
-    if (score.status === 'Final') {
+  onRowClick(game: any) {
+    if (game.status === 'Final') {
       this.detailsFinalDialogVisible = true; 
+      this.gameDetails = game;
     }
   }
 
