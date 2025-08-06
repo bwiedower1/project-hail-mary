@@ -10,6 +10,7 @@ import { NgClass, NgIf } from '@angular/common';
 import { ImageModule } from 'primeng/image';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { DialogModule } from 'primeng/dialog';
+import { NflGameFinalDialog } from '../../shared/nfl-game-final-dialog/nfl-game-final-dialog/nfl-game-final-dialog';
 
 @Component({
   selector: 'nfl-scores-table',
@@ -23,7 +24,8 @@ import { DialogModule } from 'primeng/dialog';
     ImageModule,
     ProgressSpinnerModule,
     NgIf,
-    DialogModule
+    DialogModule,
+    NflGameFinalDialog
   ],
   templateUrl: './nfl-scores.component.html',
   styleUrl: './nfl-scores.component.scss',
@@ -37,7 +39,7 @@ export class NflScoresTable implements OnInit{
   selectedYear: any;
   data: any;
   tableLoading: boolean | undefined;
-  detailsDialogVisible: boolean = false;
+  detailsFinalDialogVisible: boolean = false;
 
   constructor(private espnService: EspnService) {
     this.scores  = [];
@@ -85,7 +87,12 @@ export class NflScoresTable implements OnInit{
 
   onRowClick(score: any) {
     console.log('Row clicked:', score);
-    this.detailsDialogVisible = true; 
-    // You can implement further actions here, like navigating to a detailed view or showing more info.
+    if (score.status === 'Final') {
+      this.detailsFinalDialogVisible = true; 
+    }
+  }
+
+  closeFinalDialog() {
+    this.detailsFinalDialogVisible = false;
   }
 }
